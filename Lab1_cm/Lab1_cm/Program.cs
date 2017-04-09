@@ -10,6 +10,7 @@ namespace Lab1_cm
     {
         static void Main(string[] args)
         {
+
         }
     }
 }
