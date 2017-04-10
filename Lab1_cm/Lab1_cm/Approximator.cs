@@ -9,7 +9,7 @@ namespace Lab1_cm
     static class Approximator
     {
         public static double epsilan = Math.Pow(10, -4);
-        public static double epsilanIter = Math.Pow(10, -2);
+        public static double epsilanIter = Math.Pow(10, -3);
         public static int maxIterationCount = 100000;
 
         public static Random rnd = new Random();
@@ -133,7 +133,7 @@ namespace Lab1_cm
             do
             {
                 xn = xn + ksi(xn) * func(xn);
-                counter++;
+                 counter++;
             } while (counter < maxIterationCount && !(Math.Abs(func(xn)) / MinValue(func1, a, b) <= epsilanIter));
 
             if (counter == maxIterationCount) return double.PositiveInfinity;
@@ -187,7 +187,7 @@ namespace Lab1_cm
 
             double xn = (a + b) / 2;
 
-            while (Math.Abs(func(xn)) <= epsilanIter)
+            while (Math.Abs(func(xn)) > epsilanIter)
             {
                 if (func(xn) * func(a) < 0) b = xn;
                 else if (func(xn) * func(b) < 0) a = xn;
