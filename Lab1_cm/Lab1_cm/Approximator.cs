@@ -59,7 +59,7 @@ namespace Lab1_cm
         }
         private static bool IsSuitable(Function func1, double a, double b)
         {
-            return IsGood((double func) => { return double.IsInfinity(func) || double.IsInfinity(func); },
+            return IsGood((double func) => { return double.IsInfinity(func) || double.IsNaN(func); },
                           func1, a, b) &&
                    (IsGood((double func) => { return func >= 0; },
                           func1, a, b) ||
@@ -143,23 +143,33 @@ namespace Lab1_cm
         
         public static double SimpleIteration(Function func, Function func1, Function func2, double a, double b)
         {
+            if (!IsSuitable(func1, a, b)) throw new Exception("Method can not be applied!");
+
             Function ksi = FuncSimpleIteration(func1, a, b);
 
             double x0 = InitialXSimpleIteration(a, b);
 
             return GenericIteration(func, func1, ksi, a, b, x0);
         }
-        public static double NuitonMethod(Function func, Function func1, Function func2, double a, double b)
+        public static double NewtonMethod(Function func, Function func1, Function func2, double a, double b)
         {
+            if (!IsSuitable(func1, a, b) ||
+                !IsSuitable(func2, a, b))
+                throw new Exception("Method can not be applied!");
+
             Function ksi = FuncNuitonMethod(func1, a, b);
 
             double x0 = InitialXNuitonMethod(func, func2, a, b);
 
             return GenericIteration(func, func1, ksi, a, b, x0);
         }
-        public static double HordMethod(Function func, Function func1, Function func2, double a, double b)
+        public static double ChordsMethod(Function func, Function func1, Function func2, double a, double b)
         {
-            double c = SuitableRandomArgumnent((double x) => { return func(c) * func2(c) > 0; }, a, b);
+            if (!IsSuitable(func1, a, b) ||
+                !IsSuitable(func2, a, b))
+                throw new Exception("Method can not be applied!");
+
+            double c = SuitableRandomArgumnent((double x) => { return func(x) * func2(x) > 0; }, a, b);
 
             Function ksi = FuncHordMethod(func, func1, func2, a, b, c);
 
@@ -167,7 +177,7 @@ namespace Lab1_cm
 
             return GenericIteration(func, func1, ksi, a, b, x0);
         }
-        public static double HalfDividing(Function func, double a, double b)
+        public static double HalfDivision(Function func, double a, double b)
         {
             if (func(a) * func(b) > 0)
                 return double.PositiveInfinity;
