@@ -17,6 +17,12 @@ namespace Lab1_cm
 
         private delegate double Method(Approximator.Function func,
             Approximator.Function func1, Approximator.Function func2, double a, double b);
+        //static Approximator.Function[] funcFirst = { (double x) => { return Math.Pow(x, 3) - 2.9 * x + 3; },
+        //                                             (double x) => { return 3 * Math.Pow(x, 2) - 2.9; },
+        //                                             (double x) => { return 6 * x; } };
+        //static Approximator.Function[] funcSecond = { (double x) => { return Math.Tan(0.4 * x + 0.4) - Math.Pow(x, 2); },
+        //                                             (double x) => { return 0.4 / Math.Pow(Math.Cos(0.4 * x + 0.4), 2) - 2 * x; },
+        //                                             (double x) => { return -0.32 / Math.Pow(Math.Cos(0.4 * x + 0.4), 3) - 2; } };
 
         static Approximator.Function[] funcFirst = { (double x) => { return Math.Pow(x, 3) - 7 * x - 19; },
                                                      (double x) => { return 3 * Math.Pow(x, 2) - 7; },

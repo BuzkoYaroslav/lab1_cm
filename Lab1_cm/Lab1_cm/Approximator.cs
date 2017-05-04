@@ -99,7 +99,7 @@ namespace Lab1_cm
             double min = MinValue(func1, a, b),
                    max = MaxValue(func1, a, b);
 
-            int k = IsGood((double func) => { return func <= 0; }, func1, a, b) ? 1 : -1;
+            int k = IsGood((double func) => { return func <= 0; }, func1, a, b) ? -1 : 1;
 
             return (double x) => { return k * 2.0 / (min + max); };
         }
@@ -110,12 +110,13 @@ namespace Lab1_cm
         private static Function FuncHordMethod(Function func, Function func1, Function func2, double a, double b, double c)
         {
             double funcc = func(c);
-            return (double x) => { return -(x - c) / func(x) - funcc; };
+            return (double x) => { return -(x - c) / (func(x) - funcc); };
         }
 
         private static double InitialXSimpleIteration(double a, double b)
         {
-            return RandomNumber(a, b);
+            //return RandomNumber(a, b);
+            return (a + b) / 2;
         }
         private static double InitialXNuitonMethod(Function func, Function func2, double a, double b)
         {
@@ -136,7 +137,7 @@ namespace Lab1_cm
                  counter++;
             } while (counter < maxIterationCount && !(Math.Abs(func(xn)) / MinValue(func1, a, b) <= epsilanIter));
 
-            if (counter == maxIterationCount) return double.PositiveInfinity;
+            if (counter == maxIterationCount) return xn;//  double.PositiveInfinity;
 
             return xn;
         }
